@@ -31,15 +31,15 @@ export default class RandomChar extends Component {
     });
   };
 
+  onCharLoading = () => {
+    this.setState({ loading: true, error: false });
+  };
+
   onError = () => {
     this.setState({
       loading: false,
       error: true,
     });
-  };
-
-  onCharLoading = () => {
-    this.setState({ loading: true });
   };
 
   updateChar = () => {

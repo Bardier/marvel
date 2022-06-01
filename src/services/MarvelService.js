@@ -3,6 +3,8 @@ export default class MarvelService {
   _apiKey = "apikey=cb4a48a9fb5b07c688d082e445e12e9c"; // !bardier.pro@gmail.com
   // _apiKey = "apikey=e9a10b53cab1788f3ad0a31cfcbf0238"; // !byefar@i.ua
 
+  _baseOffset = 210;
+
   getResource = async (url) => {
     const res = await fetch(url);
 
@@ -13,10 +15,12 @@ export default class MarvelService {
     return await res.json();
   };
 
-  getAllCharacters = async () => {
+  getAllCharacters = async (offset = this._baseOffset) => {
     const res = await this.getResource(
-      `${this._apiBase}characters?limit=9&offset=210&${this._apiKey}`
+      `${this._apiBase}characters?limit=9&offset=${offset}&${this._apiKey}`
     );
+
+    this._baseOffset += 9;
     return res.data.results.map(this._transformCharacter);
   };
 

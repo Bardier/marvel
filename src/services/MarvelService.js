@@ -20,7 +20,6 @@ export default class MarvelService {
       `${this._apiBase}characters?limit=9&offset=${offset}&${this._apiKey}`
     );
 
-    this._baseOffset += 9;
     return res.data.results.map(this._transformCharacter);
   };
 

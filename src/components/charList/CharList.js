@@ -18,8 +18,38 @@ export default class CharList extends Component {
   marvelService = new MarvelService();
 
   componentDidMount() {
-    this.onRequest();
+    if (localStorage.getItem("charListLS")) {
+      const charList = JSON.parse(localStorage.getItem("charListLS"));
+      this.setState({
+        charList,
+        loading: false,
+        offset: this.state.offset + charList.length,
+      });
+    } else {
+      this.onRequest();
+    }
+    // * Подгрузка при скроле в конец страницы
+    // this.onScroll();
   }
+
+  componentWillUnmout() {
+    // * Подгрузка при скроле в конец страницы
+    // window.removeEventListener("scroll", this.onScroll);
+  }
+
+  onScroll = () => {
+    window.addEventListener("scroll", () => {
+      if (this.state.newItemLoading) {
+        return;
+      }
+      if (
+        document.documentElement.clientHeight + window.pageYOffset >=
+        document.body.clientHeight
+      ) {
+        this.onRequest(this.state.offset);
+      }
+    });
+  };
 
   onRequest = (offset) => {
     this.onCharListLoading();
@@ -84,6 +114,10 @@ export default class CharList extends Component {
   render() {
     const { charList, loading, error, offset, newItemLoading, charEnded } =
       this.state;
+
+    if (charList.length > 0) {
+      localStorage.setItem("charListLS", JSON.stringify(charList));
+    }
 
     const items = this.renderItems(charList);
 

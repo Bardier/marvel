@@ -99,10 +99,14 @@ const View = ({ char }) => {
         <div>
           <div className="char__info-name">{name}</div>
           <div className="char__btns">
-            <a href={homepage} className="button button__main">
+            <a href={homepage} target="_blanck" className="button button__main">
               <div className="inner">homepage</div>
             </a>
-            <a href={wiki} className="button button__secondary">
+            <a
+              href={wiki}
+              target="_blanck"
+              className="button button__secondary"
+            >
               <div className="inner">Wiki</div>
             </a>
           </div>

@@ -135,11 +135,7 @@ export default class CharList extends Component {
       );
     });
 
-    return (
-      <ul className="char__grid" onClick={(e) => this.addCharFocus(e)}>
-        {items}
-      </ul>
-    );
+    return <ul className="char__grid">{items}</ul>;
   };
 
   render() {

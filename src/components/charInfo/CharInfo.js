@@ -1,6 +1,7 @@
 import "./charInfo.scss";
 
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import useMarvelService from "../../services/MarvelService";
 
@@ -83,11 +84,12 @@ const View = ({ char }) => {
       <ul className="char__comics-list">
         {comics.length > 0 ? null : "There is no comics for this character."}
         {comics.map((el, i) => {
+          const link = el.resourceURI.split("public")[1];
           // eslint-disable-next-line
           if (i >= 10) return;
           return (
             <li className="char__comics-item" key={i}>
-              {el.name}
+              <Link to={link}>{el.name}</Link>
             </li>
           );
         })}

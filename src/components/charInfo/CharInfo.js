@@ -89,7 +89,7 @@ const View = ({ char }) => {
           if (i >= 10) return;
           return (
             <li className="char__comics-item" key={i}>
-              <Link to={link}>{el.name}</Link>
+              <Link to={"/marvel" + link}>{el.name}</Link>
             </li>
           );
         })}
